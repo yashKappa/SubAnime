@@ -1282,8 +1282,8 @@ function App() {
       <nav>
         <ul>
           <div className="logo">
-            <img src="logo2.png" alt="logo" />
-            SubAnime
+          <img src={`${process.env.PUBLIC_URL}/logo2.png`} alt="Logo" />
+          SubAnime
           </div>
           <li className="custom-btn btn-5">
             <span>Home</span>
