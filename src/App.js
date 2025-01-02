@@ -1282,8 +1282,8 @@ function App() {
       <nav>
         <ul>
           <div className="logo">
-          <img src={`${process.env.PUBLIC_URL}/logo2.png`} alt="Logo" />
-          SubAnime
+            <img src={`${process.env.PUBLIC_URL}/logo2.png`} alt="Logo" />
+            SubAnime
           </div>
           <li className="custom-btn btn-5">
             <span>Home</span>
@@ -1324,7 +1324,7 @@ function App() {
           {slides.slice(0, 5).map((slide, index) => (
             <img
               key={index}
-              src={slide.image}
+              src={process.env.PUBLIC_URL + "/" + slide.image}
               alt={`Slide ${index + 1}`}
               className={currentIndexSlides === index ? "active" : "inactive"}
             />
@@ -1356,6 +1356,7 @@ function App() {
             <div className="card">
               <div className="card-image">
                 <img src={slide.image} alt={slide.title} className="card-img" />
+                {/* <img src={process.env.PUBLIC_URL + "/" + slide.image} alt={slide.title} className="card-img" /> */}
                 <h1 className="title">{slide.title}</h1>
               </div>
               <div className="card-hover">

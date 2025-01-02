@@ -494,7 +494,7 @@ li {
   /* Position relative to .btn-5 */
   height: 2px;
   width: 0;
-  background: #ff00ff;
+  background: #f8c3f8;
   /* Light purple for border effect */
   box-shadow:
     -1px -1px 5px 0px #fff,
