@@ -42,7 +42,10 @@ function App() {
       funFact: "Despite their differences, the team shares a strong bond built on trust and loyalty.",
       role: "Team Unity",
       genres: ["Action, ", "Adventure"]
-    },
+    }
+  ]
+
+  const cards = [
     {
       image: "https://4kwallpapers.com/images/wallpapers/demon-slayer-2048x2048-10716.jpg",
       title: "Demon Slayer",
@@ -1170,6 +1173,46 @@ function App() {
       funFact: "The series was adapted from a popular light novel and became a hit due to its blend of comedy, action, and heartwarming moments.",
       role: "Anime Series",
       genres: ["Comedy", "Adventure", "Fantasy"]
+    },
+    {
+      image: "https://m.media-amazon.com/images/M/MV5BYzZiNmI3MWYtYzA4YS00YjE4LWFhMzQtYzQ3MTE2MTcyOGM1XkEyXkFqcGc@._V1_.jpg",
+      title: "Naruto Shippuden: The Movie",
+      description: "Naruto Shippuden: The Movie follows Naruto Uzumaki and his team as they embark on a mission to protect the world from a powerful curse. The film explores the themes of friendship, sacrifice, and the struggle between good and evil.",
+      funFact: "The Naruto Shippuden: The Movie was released in 2007 and is the first film in the Naruto Shippuden series, featuring high-stakes action and emotional moments.",
+      role: "Anime Movie",
+      genres: ["tion", "Adventure", "Fantasy"]
+    },
+    {
+      image: "https://m.media-amazon.com/images/M/MV5BMDk5N2Y2ZGUtZGY5YS00YjgyLWEzOGItMjgwZWJjYmJiZmViXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+      title: "Naruto Shippuden: The Movie - Bonds",
+      description: "Naruto Shippuden: The Movie - Bonds is a story where Naruto and his friends defend their village from a dangerous new threat. The movie delves deeper into the themes of loyalty, sacrifice, and protecting one's home.",
+      funFact: "This film is the second in the Naruto Shippuden movie series and showcases Naruto's growth as a ninja and leader.",
+      role: "Anime Movie",
+      genres: ["tion", "Adventure", "Fantasy"]
+    },
+    {
+      image: "https://m.media-amazon.com/images/M/MV5BNDkzNTAxMjAtMGI0Ni00M2E4LWI0YTgtNTkzMGVhYjAwYTBhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+      title: "Naruto Shippuden: The Movie - The Will of Fire",
+      description: "In Naruto Shippuden: The Movie - The Will of Fire, Naruto and his comrades must uncover the truth behind a mysterious plot and stop a major conflict from erupting. The film emphasizes the will of the shinobi and the importance of protecting the village.",
+      funFact: "This is the third Naruto Shippuden movie and it focuses on the theme of sacrifice for the greater good.",
+      role: "Anime Movie",
+      genres: ["tion", "Adventure", "Fantasy"]
+    },
+    {
+      image: "https://rukminim2.flixcart.com/image/850/1000/j6qs9e80/movie/v/7/h/2012-blu-ray-warner-brothers-english-naruto-shippuden-movie-will-original-imaex3vtacbmnfqs.jpeg?q=90&crop=false",
+      title: "Naruto Shippuden: The Movie - The Lost Tower",
+      description: "Naruto Shippuden: The Movie - The Lost Tower is a time-travel adventure where Naruto is transported to the past and must prevent a devastating war. The film explores the concept of destiny and the impact of actions through time.",
+      funFact: "The Lost Tower is the fourth movie in the Naruto Shippuden series and features a unique storyline involving time travel and historical changes.",
+      role: "Anime Movie",
+      genres: ["tion", "Adventure", "Fantasy"]
+    },
+    {
+      image: "https://m.media-amazon.com/images/M/MV5BNzMzMjBhNDktOWMyZC00NTliLWI3MWItMGY5ZDJkYzRlYmQ4XkEyXkFqcGc@._V1_.jpg",
+      title: "Naruto Shippuden: The Movie - Blood Prison",
+      description: "Naruto Shippuden: The Movie - Blood Prison follows Naruto as he is imprisoned in a high-security facility and must fight his way out. Along the way, he uncovers a conspiracy that threatens the ninja world.",
+      funFact: "Blood Prison is the fifth movie in the Naruto Shippuden series, and it introduces new characters and a darker tone compared to earlier films.",
+      role: "Anime Movie",
+      genres: ["tion", "Adventure", "Fantasy"]
     },
     {
       image: "https://i.pinimg.com/736x/69/c9/45/69c945b373dd418c1363ce621574c100.jpg",
@@ -1231,36 +1274,45 @@ function App() {
       image: "https://i.pinimg.com/originals/9c/a2/16/9ca216e583387233da57628917f090cf.jpg",
     }
   ];
-  const cardContainerRef = useRef(null); // Define the ref here
+
+  const cardContainerRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 15;
   const maxVisibleButtons = 4;
+  const [searchQuery, setSearchQuery] = useState('');
+  const [lastIndexSlides, setLastIndexSlides] = useState(0); // Track last visited slideshow index
 
-  // Calculate the starting index for the current page (adjust to start from index 5)
-  const startIndex = (currentPage - 1) * itemsPerPage + 5; // Adjust to start from the first page
-  const totalPages = Math.ceil((slides.length - 5) / itemsPerPage); // Adjust total pages for index 5 onward
-  const currentItems = slides.slice(startIndex, startIndex + itemsPerPage); // Get current page items
+  // Filter the cards based on the search query
+  const filteredCards = cards.filter(
+    (card) =>
+      card.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      card.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
-  const [currentIndexSlides, setCurrentIndexSlides] = useState(0); // Set the slides index
-  const [currentIndexHead, setCurrentIndexHead] = useState(0); // Set the head index
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const totalPages = Math.ceil(filteredCards.length / itemsPerPage);
+  const currentItems = filteredCards.slice(startIndex, startIndex + itemsPerPage);
+
+  const [currentIndexSlides, setCurrentIndexSlides] = useState(lastIndexSlides); // Use lastIndexSlides to restore the slide
+  const [currentIndexHead, setCurrentIndexHead] = useState(0);
 
   // First slideshow for `slides` (showing 5 images)
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndexSlides((prevIndex) => (prevIndex + 1) % 5); // Corrected to use setCurrentIndexSlides
-    }, 4000); // Duration should match animation time (4 seconds)
+      setCurrentIndexSlides((prevIndex) => (prevIndex + 1) % 5);
+    }, 4000);
 
-    return () => clearInterval(interval); // Cleanup on component unmount
+    return () => clearInterval(interval);
   }, []);
 
   // Second slideshow for `head` (showing 3 images)
   useEffect(() => {
     const intervalHead = setInterval(() => {
-      setCurrentIndexHead((prevIndex) => (prevIndex + 1) % head.length); // Corrected to use setCurrentIndexHead
-    }, 4000); // Change every 4 seconds
+      setCurrentIndexHead((prevIndex) => (prevIndex + 1) % 3);
+    }, 4000);
 
-    return () => clearInterval(intervalHead); // Cleanup interval on unmount
-  }, [head.length]);
+    return () => clearInterval(intervalHead);
+  }, []);
 
   // Handle page change and scroll to top
   const changePage = (page) => {
@@ -1272,11 +1324,21 @@ function App() {
     const totalPagesArray = Array.from({ length: totalPages }, (_, i) => i + 1);
     const start = Math.max(0, currentPage - Math.ceil(maxVisibleButtons / 2));
     const end = Math.min(totalPages, start + maxVisibleButtons);
-
     return totalPagesArray.slice(start, end);
   };
 
-
+  // Reset page number to 1 when search query changes
+  useEffect(() => {
+    if (searchQuery === '') {
+      // Restore slideshow index when search query is cleared
+      setCurrentIndexSlides(lastIndexSlides);
+    } else {
+      // Save the current index before search is made
+      setLastIndexSlides(currentIndexSlides);
+    }
+    setCurrentPage(1);
+  }, [searchQuery, lastIndexSlides, currentIndexSlides]);
+  
   return (
     <div className="App">
       <nav>
@@ -1350,34 +1412,44 @@ function App() {
         </div>
       </div>
 
-      <div className="card-container">
-        {currentItems.map((slide, index) => (
-          <div key={index} className="card-wrapper">
-            <div className="card">
-              <div className="card-image">
-                <img src={slide.image} alt={slide.title} className="card-img" />
-                {/* <img src={process.env.PUBLIC_URL + "/" + slide.image} alt={slide.title} className="card-img" /> */}
-                <h1 className="title">{slide.title}</h1>
-              </div>
-              <div className="card-hover">
-                <h1 className="card-title">{slide.title}</h1>
-                <p className="card-rating">⭐ 9.0</p>
-                <p className="card-duration">24 min per ep.</p>
-                <p className="card-description">{slide.description}</p>
-                <p className="card-status">
-                  <strong>Status:</strong> Ongoing
-                </p>
-                <p className="card-genre">
-                  <strong>Genres:</strong> Action, Adventure, Fantasy
-                </p>
-                <p className="card-studio">
-                  <strong>Studio:</strong> Ufotable
-                </p>
-                <div className="wrappers">
-                  <div className="content">
-                    <span className="cta" href="#">
-                      <span>More Details</span>
-                      <span>
+      <div>
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
+
+      <div className="card-container" ref={cardContainerRef}>
+        {currentItems.length > 0 ? (
+          currentItems.map((card, index) => (
+            <div key={index} className="card-wrapper">
+              <div className="card">
+                <div className="card-image">
+                  <img src={card.image} alt={card.title} className="card-img" />
+                  <h1 className="title">{card.title}</h1>
+                </div>
+                <div className="card-hover">
+                  <h1 className="card-title">{card.title}</h1>
+                  <p className="card-rating">⭐ 9.0</p>
+                  <p className="card-duration">24 min per ep.</p>
+                  <p className="card-description">{card.description}</p>
+                  <p className="card-status">
+                    <strong>Status:</strong> Ongoing
+                  </p>
+                  <p className="card-genre">
+                    <strong>Genres:</strong> Action, Adventure, Fantasy
+                  </p>
+                  <p className="card-studio">
+                    <strong>Studio:</strong> Ufotable
+                  </p>
+                  <div className="wrappers">
+                    <div className="content">
+                      <span className="cta" href="#">
+                        <span>More Details</span>
+                        <span>
                         <svg
                           width="30px"
                           height="20px"
@@ -1404,14 +1476,17 @@ function App() {
                             ></path>
                           </g>
                         </svg>
+                        </span>
                       </span>
-                    </span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p>No results found</p>
+        )}
 
         <div className="pagination">
           <button
@@ -1429,9 +1504,7 @@ function App() {
               {page}
             </button>
           ))}
-          {currentPage + maxVisibleButtons / 2 < totalPages && (
-            <span>...</span> // Indicate more pages
-          )}
+          {currentPage + maxVisibleButtons / 2 < totalPages && <span>...</span>}
           <button
             onClick={() => changePage(currentPage + 1)}
             disabled={currentPage === totalPages}
@@ -1440,6 +1513,9 @@ function App() {
           </button>
         </div>
       </div>
+    </div>
+
+    
       <footer className="footer">
         <div className="footer-container">
           {/* Anime Categories */}
