@@ -522,276 +522,91 @@ li {
   transition: 500ms ease all;
 }
 
-/* Card Container Styling */
-.card-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 20px;
-  flex-wrap: wrap;
+.movies-section {
+  padding: 20px;  
 }
 
-.card-wrapper {
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 columns per row */
+  gap: 20px;
+  justify-items: center;
+  margin-top: 20px;
+}
+
+.movie-card {
   position: relative;
-  width: calc(20% - 20px);
-  /* Ensure 4 cards fit in one row, with space between them */
-  height: 350px;
-  margin: 10px;
+  background-color: #c8a0ff; /* Light purple background for the card */
+  padding: 15px;
   border-radius: 10px;
-  overflow: hidden;
-  /* Ensure the card doesn't overflow */
-  transition: transform 0.3s ease-in-out;
-}
-
-.card {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-/* .card-wrapper:hover .card {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-} */
-
-.card-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.card-img {
-  width: 100%;
-  height: 90%;
-  border-radius: 0.5rem;
-}
-
-.title {
-  font-size: 18px;
-  background-color: #290033;
-  display: flex;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  justify-content: center;
-  align-items: center;
-  padding: 5px 0px;
-  color: #fff;
-  width: 100%;
   overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  transition: transform 0.3s ease;
+  width: 100%;
 }
 
-.card-hover {
+.movie-card img {
+  width: 100%; /* Fixed width to cover the card */
+  height: 90%;
+  border-radius: 5px;
+}
+
+.movie-card h3 {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  color: #50209e; /* Darker purple for the title text */
+}
+
+/* Initially hide all extra data */
+.movie-card .description {
+  position: absolute;
+  bottom: 0; /* Start at the bottom of the card */
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(73, 44, 105, 0.9);
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  box-sizing: border-box;
+  overflow-y: auto;
+  transform: translateY(100%); /* Initially hide the description below the card */
+  transition: transform 0.3s ease; /* Slide-in effect */
+  z-index: 1;
+}
+
+/* Show extra data when hovered */
+.movie-card:hover .description {
+  transform: translateY(0); /* Slide the description up into view */
+}
+
+.movie-card .description p {
+  margin: 10px 0;
+  font-size: 0.9rem;
+  color: #ffffff; /* Light purple color for description text */
+}
+
+.movie-card .description p span {
+  font-weight: bold;
+  color: #eaa3ff; /* Lighter purple for bold text */
+}
+
+/* Optional: Add an overlay effect */
+.movie-card:hover::after {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(71, 44, 105, 0.9);
-  color: #fff;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  opacity: 0;
-  transform: translateY(100%);
-  z-index: 1;
-  transition: opacity 0.3s, transform 0.3s;
-  overflow-y: auto;
-  max-height: 100%;
-}
-
-.card-wrapper:hover .card-hover {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.card-title {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #ffffff;
-}
-
-.card-rating,
-.card-duration,
-.card-description,
-.card-status,
-.card-genre,
-.card-studio {
-  font-size: 14px;
-  margin-bottom: 5px;
-  color: #ffffff;
-}
-
-.card-button {
-  margin-top: 10px;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  background: #532b55;
-  color: #fff;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.card-button:hover {
-  background: #7b3580;
-}
-
-/* Style for the entire scrollbar */
-html::-webkit-scrollbar {
-  width: 12px;
-  /* Width of the scrollbar */
-}
-
-/* Style for the scrollbar track (background) */
-html::-webkit-scrollbar-track {
-  background: #e0b3ff;
-  /* Light purple shade */
-}
-
-/* Style for the scrollbar thumb (the draggable part) */
-html::-webkit-scrollbar-thumb {
-  background: #8e44ad;
-  /* Darker purple shade */
+  width: 100%;
+  height: 100%;
   border-radius: 10px;
-  border: 3px solid #e0b3ff;
-  /* Optional border to add a lighter purple edge */
+  z-index: 0; /* Ensure overlay is behind content */
 }
 
-/* Style for the scrollbar thumb when hovered */
-html::-webkit-scrollbar-thumb:hover {
-  background: #9b59b6;
-  /* Even darker purple shade on hover */
-}
-
-/* Optionally, apply overflow behavior to the body or html if needed */
-body {
-  overflow-y: scroll;
-  /* Ensure scrolling is available */
-}
-
-/* Style for the entire scrollbar */
-.card-hover::-webkit-scrollbar {
-  width: 12px;
-  /* Width of the scrollbar */
-}
-
-/* Style for the scrollbar track (background) */
-.card-hover::-webkit-scrollbar-track {
-  background: #e0b3ff;
-  /* Light purple shade */
-  border-radius: 10px;
-}
-
-/* Style for the scrollbar thumb (the draggable part) */
-.card-hover::-webkit-scrollbar-thumb {
-  background: #8e44ad;
-  /* Darker purple shade */
-  border-radius: 10px;
-  border: 3px solid #e0b3ff;
-  /* Optional border to add a lighter purple edge */
-}
-
-/* Style for the scrollbar thumb when hovered */
-.card-hover::-webkit-scrollbar-thumb:hover {
-  background: #9b59b6;
-  /* Even darker purple shade on hover */
-}
-
-.search-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.search-container input {
-  width: 300px;
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  outline: none;
-  color: #4c0070;
-  background-color: #e0baff;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-.search-container input:focus {
-  box-shadow: 0 0 10px rgba(123, 44, 191, 0.7);
-  border-color: #4c0070;
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 20px;
-  background-color: #290033a4;
-  padding: 5px 10px;
-  border-radius: 0.3rem;
-  border: 2px solid rgba(128, 0, 128, 0.425);
-}
-
-.pagination button {
-  background-color: #6a0dad;
-  /* Base purple color */
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.pagination button:hover {
-  background-color: #9b30ff;
-  transform: scale(1.1);
-}
-
-.pagination button:disabled {
-  background-color: #d3a4ff;
-  cursor: not-allowed;
-}
-
-.pagination .active {
-  background-color: #800080;
-  font-weight: bold;
-}
-
-.pagination button:not(:disabled):focus {
-  outline: none;
-  box-shadow: 0 0 10px 2px rgba(138, 43, 226, 0.6);
-}
-
-.pagination span {
-  color: #ffffff;
-  font-size: 3rem;
-  display: flex;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-}
-
-.pagination span {
-  color: #ffffff;
-  font-size: 3rem;
-  display: flex;
-  position: relative;
-  justify-content: center;
-  align-items: center;
+.description h2 {
+  border-bottom: 2px solid #eaa3ff; /* Optional: Add a bottom border for the heading */
 }
 
 .footer {
@@ -1069,20 +884,11 @@ body {
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:900i');
 
-.wrappers .content {
+.description .content {
   width: fit-content;
 }
 
-.wrappers {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  align-items: end;
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.wrappers .cta {
+.description .cta {
   cursor: pointer;
   display: flex;
   padding: 3px 8px; /* Reduced padding */
@@ -1096,11 +902,11 @@ body {
   font-weight: bold;
 }
 
-.wrappers .cta:focus {
+.description .cta:focus {
   outline: none;
 }
 
-.wrappers .cta:hover {
+.description .cta:hover {
   transition: 0.5s;
   box-shadow: 6px 6px 0 #FBC638; /* Adjusted hover shadow */
   background-color: #6225E6;
@@ -1108,21 +914,21 @@ body {
   padding: 3px 7px 3px 5px; /* Adjusted hover padding */
 }
 
-.wrappers .cta span:nth-child(2) {
+.description .cta span:nth-child(2) {
   transition: 0.5s;
   margin-right: 0px;
 }
 
-.wrappers .cta:hover span:nth-child(2) {
+.description .cta:hover span:nth-child(2) {
   transition: 0.5s;
   margin-right: 20px; /* Reduced hover margin */
 }
 
-.wrappers span {
+.description span {
   transform: skewX(15deg);
 }
 
-.wrappers span:nth-child(2) {
+.description span:nth-child(2) {
   width: 15px; /* Reduced width */
   margin-left: 20px; /* Reduced margin */
   position: relative;
@@ -1131,26 +937,26 @@ body {
 
 /**************SVG****************/
 
-.wrappers path.one {
+.description path.one {
   transition: 0.4s;
   transform: translateX(-50%); /* Adjusted transform */
 }
 
-.wrappers path.two {
+.description path.two {
   transition: 0.5s;
   transform: translateX(-25%); /* Adjusted transform */
 }
 
-.wrappers .cta:hover path.three {
+.description .cta:hover path.three {
   animation: color_anim 1s infinite 0.2s;
 }
 
-.wrappers .cta:hover path.one {
+.description .cta:hover path.one {
   transform: translateX(0%);
   animation: color_anim 1s infinite 0.6s;
 }
 
-.wrappers .cta:hover path.two {
+.description .cta:hover path.two {
   transform: translateX(0%);
   animation: color_anim 1s infinite 0.4s;
 }
