@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/SubAnime/static/css/main.287f0ff7.css",
-    "main.js": "/SubAnime/static/js/main.2fcbbf2f.js",
+    "main.css": "/SubAnime/static/css/main.6e89a78d.css",
+    "main.js": "/SubAnime/static/js/main.bcc48b3b.js",
     "static/js/488.8db228a5.chunk.js": "/SubAnime/static/js/488.8db228a5.chunk.js",
     "index.html": "/SubAnime/index.html",
-    "main.287f0ff7.css.map": "/SubAnime/static/css/main.287f0ff7.css.map",
-    "main.2fcbbf2f.js.map": "/SubAnime/static/js/main.2fcbbf2f.js.map",
+    "main.6e89a78d.css.map": "/SubAnime/static/css/main.6e89a78d.css.map",
+    "main.bcc48b3b.js.map": "/SubAnime/static/js/main.bcc48b3b.js.map",
     "488.8db228a5.chunk.js.map": "/SubAnime/static/js/488.8db228a5.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.287f0ff7.css",
-    "static/js/main.2fcbbf2f.js"
+    "static/css/main.6e89a78d.css",
+    "static/js/main.bcc48b3b.js"
   ]
 }
