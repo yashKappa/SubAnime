@@ -535,27 +535,35 @@ li {
 }
 
 .movie-card {
-  position: relative;
+  position:relative;
   background-color: #c8a0ff; /* Light purple background for the card */
-  padding: 15px;
+  padding: 0px 0px 20px 0px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   overflow: hidden;
   transition: transform 0.3s ease;
-  width: 100%;
+  width: 90%;
+  height: 90%;
+  margin-top: -2rem;
+  border: 3px solid #c8a0ff;
 }
 
 .movie-card img {
   width: 100%; /* Fixed width to cover the card */
   height: 90%;
-  border-radius: 5px;
 }
 
 .movie-card h3 {
-  font-size: 1.2rem;
+  font-size: 1rem; /* Adjust font size as needed */
   margin-top: 10px;
-  color: #50209e; /* Darker purple for the title text */
+  color: #50209e;
+  width: 100%;
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflowed text */
+  text-overflow: ellipsis; /* Add ellipsis (...) to truncated text */
+  text-align: center;
+  padding: 0px 10px;
 }
 
 /* Initially hide all extra data */
@@ -590,7 +598,7 @@ li {
 
 .movie-card .description p span {
   font-weight: bold;
-  color: #eaa3ff; /* Lighter purple for bold text */
+  color: #eaa3ff; 
 }
 
 /* Optional: Add an overlay effect */
@@ -606,7 +614,8 @@ li {
 }
 
 .description h2 {
-  border-bottom: 2px solid #eaa3ff; /* Optional: Add a bottom border for the heading */
+  border-bottom: 2px solid #eaa3ff; 
+  font-size: small;
 }
 
 .footer {
@@ -893,7 +902,7 @@ li {
   display: flex;
   padding: 3px 8px; /* Reduced padding */
   text-decoration: none;
-  font-size: 16px; /* Smaller font size */
+  font-size: 12px; /* Smaller font size */
   color: white;
   background: #6225E6;
   transition: 1s;
@@ -921,7 +930,7 @@ li {
 
 .description .cta:hover span:nth-child(2) {
   transition: 0.5s;
-  margin-right: 20px; /* Reduced hover margin */
+  margin-right: 10px; /* Reduced hover margin */
 }
 
 .description span {
@@ -929,7 +938,7 @@ li {
 }
 
 .description span:nth-child(2) {
-  width: 15px; /* Reduced width */
+  width: 10px; /* Reduced width */
   margin-left: 20px; /* Reduced margin */
   position: relative;
   top: 10%; /* Adjusted position */
@@ -975,4 +984,65 @@ li {
   100% {
     fill: white;
   }
+}
+
+
+/* Style for the entire scrollbar */
+html::-webkit-scrollbar {
+  width: 12px;
+  /* Width of the scrollbar */
+}
+
+/* Style for the scrollbar track (background) */
+html::-webkit-scrollbar-track {
+  background: #e0b3ff;
+  /* Light purple shade */
+}
+
+/* Style for the scrollbar thumb (the draggable part) */
+html::-webkit-scrollbar-thumb {
+  background: #8e44ad;
+  /* Darker purple shade */
+  border-radius: 10px;
+  border: 3px solid #e0b3ff;
+  /* Optional border to add a lighter purple edge */
+}
+
+/* Style for the scrollbar thumb when hovered */
+html::-webkit-scrollbar-thumb:hover {
+  background: #9b59b6;
+  /* Even darker purple shade on hover */
+}
+
+
+/* Style for the entire scrollbar */
+.description::-webkit-scrollbar {
+  width: 12px;
+  /* Width of the scrollbar */
+}
+
+/* Style for the scrollbar track (background) */
+.description::-webkit-scrollbar-track {
+  background: #e0b3ff;
+  /* Light purple shade */
+}
+
+/* Style for the scrollbar thumb (the draggable part) */
+.description::-webkit-scrollbar-thumb {
+  background: #8e44ad;
+  /* Darker purple shade */
+  border-radius: 10px;
+  border: 3px solid #e0b3ff;
+  /* Optional border to add a lighter purple edge */
+}
+
+/* Style for the scrollbar thumb when hovered */
+.description::-webkit-scrollbar-thumb:hover {
+  background: #9b59b6;
+  /* Even darker purple shade on hover */
+}
+
+.msg{
+  color: white;
+  font-size: xx-large;
 }

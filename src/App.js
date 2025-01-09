@@ -198,7 +198,9 @@ function App() {
             movies.map((movie, index) => (
               <div key={index} className="movie-card">
                 <img src={movie.image} alt={movie.title} />
+                <div className='title'>
                 <h3>{movie.title}</h3>
+                </div>
 
                 {/* Description and other details */}
                 <div className="description">
@@ -211,11 +213,11 @@ function App() {
 
                   <div className='content'>
                     <span className="cta" href="#">
-                      <span>More Details</span>
+                      <span className='watch'>Watch Now</span>
                       <span>
                         <svg
-                          width="30px"
-                          height="20px"
+                          width="20px"
+                          height="15px"
                           viewBox="0 0 66 43"
                           version="1.1"
                           xmlns="http://www.w3.org/2000/svg"
@@ -246,7 +248,7 @@ function App() {
               </div>
             ))
           ) : (
-            <p>Loading movies...</p>
+            <p className='msg'>Loading Anime...</p>
           )}
         </div>
       </div>
