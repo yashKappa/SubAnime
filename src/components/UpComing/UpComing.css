@@ -1,0 +1,110 @@
+/* Section Container */
+#new-upcoming-anime-section {
+    width: 100%;
+    min-height: 100vh;
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* ✅ CENTER EVERYTHING */
+}
+
+/* Title */
+.new-upcoming-anime-title {
+    font-size: 2rem;
+    margin-bottom: 25px;
+    color: #ffffff;
+}
+
+/* Loading / Error / Empty */
+.new-loading-message,
+.new-error-message,
+.new-no-anime-message {
+    font-size: 1rem;
+    color: #ffffff;
+    margin: 10px 0;
+}
+
+/* ✅ Anime Grid */
+.new-anime-grid {
+    width: 85%;
+    margin: 0 auto;                     /* ✅ CENTER GRID */
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    justify-items: center;              /* ✅ CENTER ITEMS */
+}
+
+/* Anime Card */
+.new-anime-card {
+    width: 100%;
+    max-width: 200px;
+    background-color: #3d0c40;
+    border-radius: 10px;
+    box-shadow: 0px 0px 12px rgba(128, 0, 128, 0.5);
+    transition: transform 0.25s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.new-anime-card:hover {
+    transform: translateY(-4px);
+}
+
+/* Poster */
+.new-anime-poster {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+}
+
+/* Title */
+.new-anime-title {
+    font-size: 0.95rem;
+    padding: 10px;
+    color: #ffffff;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Tooltip */
+.new-anime-tooltip {
+    position: absolute;
+    inset: auto 0 0 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 10px;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.25s ease;
+    font-size: 0.8rem;
+}
+
+.new-anime-card:hover .new-anime-tooltip {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* View More Wrapper */
+.new-view-more {
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;   /* ✅ CENTER BUTTON */
+}
+
+/* View More Button */
+.new-view-more button {
+    background-color: #722c75;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.new-view-more button:hover {
+    background-color: #3f1841;
+}

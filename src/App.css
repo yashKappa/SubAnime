@@ -12,11 +12,13 @@ body {
   width: 100%;
   height: 100vh;
   justify-content: center;
+  
+  overflow-x: hidden;
 }
 
 nav {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   background-color: #400150;
   z-index: 999;
 }
@@ -29,7 +31,8 @@ ul {
   z-index: 3;
   background-color: #300130;
   width: 100%;
-  justify-content: center;
+  justify-content: space-evenly;
+  justify-content: end;
 }
 
 li {
@@ -224,26 +227,26 @@ li {
   }
 }
 
-.head h1 {
-  font-size: 3rem;
+.top h1 {
+  font-size: 2.5rem;
   margin: 0;
   animation: slideIn 1.5s ease-out forwards;
-  /* Animation for sliding in */
   color: #ffffff;
-  /* Soft light purple color for the title */
   text-shadow: 2px 2px 4px rgb(183, 0, 255), -2px -2px 4px rgb(111, 0, 255);
-  /* Multiple shadows */
+  text-align: center;
+  padding: 10px 0px;
+  margin-top: 2rem;
 }
 
 /* Keyframe for the slide-in animation */
 @keyframes slideIn {
   0% {
-    transform: translateX(-100%);
+    transform: translateY(-100%);
     /* Starts off-screen to the left */
   }
 
-  100% {
-    transform: translateX(0);
+  10% {
+    transform: translateY(0);
     /* Ends at normal position */
   }
 }
@@ -254,9 +257,7 @@ li {
   font-style: italic;
   opacity: 0;
   animation: fadeInText 1.5s ease-out 1.2s forwards;
-  /* Text fade-in animation with delay */
   color: #e6a9e5;
-  /* Light purple for the paragraph */
 }
 
 /* Keyframe for fading in the paragraph text */
@@ -520,102 +521,6 @@ li {
   width: 100%;
   /* Expand to full width of the button */
   transition: 500ms ease all;
-}
-
-.movies-section {
-  padding: 20px;  
-}
-
-.movie-list {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 columns per row */
-  gap: 20px;
-  justify-items: center;
-  margin-top: 20px;
-}
-
-.movie-card {
-  position:relative;
-  background-color: #c8a0ff; /* Light purple background for the card */
-  padding: 0px 0px 20px 0px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  overflow: hidden;
-  transition: transform 0.3s ease;
-  width: 90%;
-  height: 90%;
-  margin-top: -2rem;
-  border: 3px solid #c8a0ff;
-}
-
-.movie-card img {
-  width: 100%; /* Fixed width to cover the card */
-  height: 90%;
-}
-
-.movie-card h3 {
-  font-size: 1rem; /* Adjust font size as needed */
-  margin-top: 10px;
-  color: #50209e;
-  width: 100%;
-  white-space: nowrap; /* Prevent text wrapping */
-  overflow: hidden; /* Hide overflowed text */
-  text-overflow: ellipsis; /* Add ellipsis (...) to truncated text */
-  text-align: center;
-  padding: 0px 10px;
-}
-
-/* Initially hide all extra data */
-.movie-card .description {
-  position: absolute;
-  bottom: 0; /* Start at the bottom of the card */
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(73, 44, 105, 0.9);
-  color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: left;
-  box-sizing: border-box;
-  overflow-y: auto;
-  transform: translateY(100%); /* Initially hide the description below the card */
-  transition: transform 0.3s ease; /* Slide-in effect */
-  z-index: 1;
-}
-
-/* Show extra data when hovered */
-.movie-card:hover .description {
-  transform: translateY(0); /* Slide the description up into view */
-}
-
-.movie-card .description p {
-  margin: 10px 0;
-  font-size: 0.9rem;
-  color: #ffffff; /* Light purple color for description text */
-}
-
-.movie-card .description p span {
-  font-weight: bold;
-  color: #eaa3ff; 
-}
-
-/* Optional: Add an overlay effect */
-.movie-card:hover::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  z-index: 0; /* Ensure overlay is behind content */
-}
-
-.description h2 {
-  border-bottom: 2px solid #eaa3ff; 
-  font-size: small;
 }
 
 .footer {
@@ -1046,3 +951,53 @@ html::-webkit-scrollbar-thumb:hover {
   color: white;
   font-size: xx-large;
 }
+
+
+.anime {
+  padding: 20px;
+}
+
+.anime-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 200px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.anime-card img {
+  width: 100%;
+  height: 250px;
+}
+
+.anime-card h3 {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+.anime-card p {
+  color: #555;
+}
+
+.anime-card a {
+  display: block;
+  margin: 10px 0;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.anime-card a:hover {
+  text-decoration: underline;
+}
+
+
+
+.navbar{
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  justify-content: center;
+}
+
