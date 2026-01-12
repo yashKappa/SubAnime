@@ -1,0 +1,47 @@
+/* Toast container */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10000;
+}
+
+/* Toast box */
+.toast-box {
+  background: linear-gradient(135deg, rgb(235, 19, 19), #5e1370);
+  color: #ffffff;
+
+  padding: 14px 22px;
+  border-radius: 10px;
+  min-width: 220px;
+
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  box-shadow:
+    0 0 18px rgba(167, 139, 250, 0.35),
+    0 12px 30px rgba(0, 0, 0, 0.6);
+
+  font-size: 14px;
+  letter-spacing: 0.4px;
+
+  animation: slideIn 0.3s ease, fadeOut 0.4s ease 2.6s forwards;
+}
+
+/* Slide in from right */
+@keyframes slideIn {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Fade out */
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateX(120%);
+  }
+}

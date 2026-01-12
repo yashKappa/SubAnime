@@ -1,4 +1,12 @@
 /* Section Container */
+.new-upcoming-anime-container{
+    padding-top: 1.5rem;
+}
+
+.new-upcoming-anime-container h1{
+    margin-bottom: 1rem;
+}
+
 #new-upcoming-anime-section {
     width: 100%;
     min-height: 100vh;
@@ -6,6 +14,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;   /* ✅ CENTER EVERYTHING */
+
 }
 
 /* Title */
@@ -71,20 +80,36 @@
 /* Tooltip */
 .new-anime-tooltip {
     position: absolute;
-    inset: auto 0 0 0;
-    background: rgba(0, 0, 0, 0.8);
+    bottom: 0; /* attach to bottom of card */
+    left: 0;
+    right: 0;
+    max-height: 100%; /* set max height for scroll */
+    background: rgba(0, 0, 0, 0.85);
     color: #fff;
     padding: 10px;
     opacity: 0;
     transform: translateY(100%);
     transition: all 0.25s ease;
     font-size: 0.8rem;
+    overflow-y: auto; /* make scroll work */
+    border-radius: 5px;
+    z-index: 10;
+}
+
+.anime-item:hover .new-anime-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.new-anime-tooltip::-webkit-scrollbar{
+    width: 0px;
 }
 
 .new-anime-card:hover .new-anime-tooltip {
     opacity: 1;
     transform: translateY(0);
 }
+
 
 /* View More Wrapper */
 .new-view-more {
@@ -107,4 +132,12 @@
 
 .new-view-more button:hover {
     background-color: #3f1841;
+}
+
+.coming{
+    margin-top: 1.5rem;
+}
+
+.new-anime-tooltip h2{
+    color: #c13bff;
 }

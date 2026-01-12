@@ -44,6 +44,10 @@ li {
   text-align: center;
 }
 
+nav a{
+  text-decoration: none;
+}
+
 .logo img {
   width: 45px;
   animation: animName 5s linear infinite;
@@ -107,6 +111,7 @@ li {
   transition: all 0.5s ease-in-out;
   position: fixed;
 }
+
 
 .text.active {
   opacity: 1;
@@ -230,7 +235,7 @@ li {
 .top h1 {
   font-size: 2.5rem;
   margin: 0;
-  animation: slideIn 1.5s ease-out forwards;
+  animation: slideInTop 0.5s ease-out forwards;
   color: #ffffff;
   text-shadow: 2px 2px 4px rgb(183, 0, 255), -2px -2px 4px rgb(111, 0, 255);
   text-align: center;
@@ -238,18 +243,19 @@ li {
   margin-top: 2rem;
 }
 
-/* Keyframe for the slide-in animation */
-@keyframes slideIn {
+@keyframes slideInTop {
   0% {
-    transform: translateY(-100%);
-    /* Starts off-screen to the left */
+    transform: translateY(-10vh);
+    opacity: 0;
   }
-
-  10% {
+  100% {
     transform: translateY(0);
-    /* Ends at normal position */
+    opacity: 1;
   }
 }
+
+
+
 
 .head p {
   font-size: 1.2rem;
@@ -277,7 +283,7 @@ li {
 
 
 /* Button Styles */
-.slideshow .btn-12 {
+/* .slideshow .btn-12 {
   position: relative;
   right: 0px;
   bottom: 20px;
@@ -298,7 +304,6 @@ li {
 
 .slideshow .btn-12 span {
   background: linear-gradient(0deg, #800080 0%, rgba(138, 43, 226, 1) 100%);
-  /* Shades of Purple */
   display: block;
   position: absolute;
   width: 130px;
@@ -318,7 +323,6 @@ li {
 
 .slideshow .btn-12 span:nth-child(1) {
   box-shadow: -7px -7px 20px 0px hsl(270, 60%, 70%),
-    /* HSL */
     -4px -4px 5px 0px hsl(270, 50%, 60%),
     7px 7px 20px 0px rgba(0, 0, 0, 0.2),
     4px 4px 5px 0px rgba(0, 0, 0, 0.1);
@@ -341,7 +345,6 @@ li {
 
 .slideshow .btn-12:hover span:nth-child(1) {
   box-shadow: inset 2px 2px 2px 0px lavender,
-    /* Keyword */
     7px 7px 20px 0px rgba(0, 0, 0, 0.1),
     4px 4px 5px 0px rgba(0, 0, 0, 0.1);
   -webkit-transform: rotateX(0deg);
@@ -357,7 +360,7 @@ li {
   -webkit-transform: rotateX(-90deg);
   -moz-transform: rotateX(-90deg);
   transform: rotateX(-90deg);
-}
+} */
 
 /* Media Queries for Mobile Responsiveness */
 @media (max-width: 768px) {
@@ -378,10 +381,10 @@ li {
     margin-bottom: 20px;
   }
 
-  .text {
+  /* .text {
     position: relative;
     transform: translateX(0);
-  }
+  } */
 
   .text.active {
     opacity: 1;
@@ -474,16 +477,13 @@ li {
   padding: 5px 10px;
   border: none;
   overflow: hidden;
-  /* Prevent pseudo-elements from spilling out */
   color: #fff;
-  /* Text color */
   font-weight: bold;
   text-align: center;
 }
 
 .btn-5:hover {
   color: #ffffff;
-  /* Lighter purple for hover effect */
   background: transparent;
   box-shadow: none;
 }
@@ -492,11 +492,9 @@ li {
 .btn-5:after {
   content: '';
   position: absolute;
-  /* Position relative to .btn-5 */
   height: 2px;
   width: 0;
   background: #f8c3f8;
-  /* Light purple for border effect */
   box-shadow:
     -1px -1px 5px 0px #fff,
     7px 7px 20px 0px #0003,
@@ -506,22 +504,40 @@ li {
 
 .btn-5:before {
   top: 0;
-  /* Top border */
   left: 0;
 }
 
 .btn-5:after {
   bottom: 0;
-  /* Bottom border */
   right: 0;
 }
 
 .btn-5:hover:before,
 .btn-5:hover:after {
   width: 100%;
-  /* Expand to full width of the button */
   transition: 500ms ease all;
 }
+
+nav .active::before,
+nav .active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+
+  height: 2px;
+  width: 100%;
+
+  background: #ffffff73;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+  box-shadow:
+    -0.5px -0.5px 2.5px 0px #969696,
+    5px 5px 15px 0px #0003,
+    2px 2px 2.5px 0px #0002;
+  transition: 400ms ease all;
+}
+
 
 .footer {
   background-color: #2d1e40;
@@ -1001,3 +1017,134 @@ html::-webkit-scrollbar-thumb:hover {
   justify-content: center;
 }
 
+/* ===== RESPONSIVE ===== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav .navbar {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .slideshow .text-container {
+    font-size: 0.9rem;
+  }
+
+  
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  nav {
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav ul {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  nav .navbar {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  nav .login {
+    margin-top: 10px;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .slideshow .text-container {
+    top: 5%;
+    left: 5%;
+    font-size: 0.85rem;
+  }
+
+  .slideshow .back-image-container img {
+    width: 100%;
+    height: auto;
+  }
+
+ 
+}
+
+/* Small Mobile / Portrait */
+@media (max-width: 480px) {
+  nav .logo {
+    font-size: 1.2rem;
+  }
+
+  nav .logo img {
+    width: 35px;
+    height: 35px;
+  }
+
+  nav .navbar li {
+    margin: 3px 0;
+  }
+
+  .slideshow .text-container {
+    font-size: 0.8rem;
+    max-width: 95%;
+  }
+
+ 
+}
+
+/* ===== GENERAL SPACING ===== */
+body, html {
+  scroll-behavior: smooth;
+}
+
+
+@media (max-width: 500px) {
+
+  .anime-categories-row {
+    display: grid; /* Use grid instead of flex for easy 2-per-row layout */
+    grid-template-columns: repeat(2, 1fr); /* 2 categories per row */
+    gap: 15px;
+  }
+
+  .anime-categories-row .category {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .social-media-icons a img {
+    width: 25px;
+    height: 25px;
+    margin-right: 8px;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .footer-bottom {
+    font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 501px) and (max-width: 673px) {
+   .anime-categories-row {
+    display: grid; /* Use grid instead of flex for easy 2-per-row layout */
+    grid-template-columns: repeat(3, 1fr); /* 2 categories per row */
+    gap: 15px;
+  }
+
+  .anime-categories-row .category {
+    display: flex;
+    flex-direction: column;
+  }
+
+}

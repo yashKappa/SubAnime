@@ -1,0 +1,56 @@
+@media (max-width: 480px) {
+  .new-anime-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  .new-anime-poster {
+    height: 200px;
+  }
+
+  .new-anime-title {
+    font-size: 0.8rem;
+  }
+
+  .new-anime-tooltip {
+    font-size: 0.72rem;
+    max-height: 140px;
+  }
+
+  .top h1 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 640px) {
+  .new-anime-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .new-anime-poster {
+    height: 220px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .new-anime-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .new-anime-poster {
+    height: 240px;
+  }
+
+  .new-anime-title {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+  .new-anime-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+
+

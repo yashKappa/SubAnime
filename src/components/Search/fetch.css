@@ -151,6 +151,9 @@
     box-shadow: 4px 4px 0 black; /* Reduced shadow */
     transform: skewX(-15deg);
     font-weight: bold;
+    width: fit-content;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
   }
   
   .anime-list .cta:focus {
@@ -329,6 +332,7 @@
   justify-content: center;
   align-items: center;
   font-size: x-large;
+  margin-bottom: 1rem;
 }
 
 .load img{
@@ -347,4 +351,8 @@
   .search-box button {
     width: 100%;
   }
+}
+
+.fetchData{
+  padding-top: 1.5rem;
 }

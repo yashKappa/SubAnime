@@ -7,6 +7,8 @@ import SideShow from './components/SideShow/SideShow';
 import AuthModal from "./components/Auth/AuthModal";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./components/firebase";
+import WatchList from './components/WatchList/WatchList';
+import Recommend from './components/Recommend/Recommend';
 
 function App() {
   const slides = [
@@ -166,6 +168,17 @@ useEffect(() => {
         <span>TopAiring</span>
       </NavLink>
     </li>
+
+    <li>
+      <NavLink
+        to="/WatchList"
+        className={({ isActive }) =>
+          `custom-btn btn-5 ${isActive ? "active" : ""}`
+        }
+      >
+        <span>Watch List</span>
+      </NavLink>
+    </li>
     </span>
 
     <div className='login'>
@@ -198,10 +211,10 @@ useEffect(() => {
               <p><strong>Fun Fact:</strong> {slide.funFact}</p>
               <p><strong>Role:</strong> {slide.role}</p>
               <p><strong>Genres:</strong> {slide.genres}</p>
-              <button className="custom-btn btn-12">
+              {/* <button className="custom-btn btn-12">
                 <span>Click!</span>
                 <span>Read More</span>
-              </button>
+              </button> */}
             </div>
           ))}
         </div>
@@ -235,11 +248,13 @@ useEffect(() => {
       </div>
 
       <Routes>
-  <Route path="/" element={<AnimeFetcher />} />
+  <Route path="/" element={<Recommend />} />
   <Route path="/Search" element={<AnimeFetcher />} />
   <Route path="/UpComing" element={<UpcomingAnime />} />
   <Route path="/TopAiring" element={<SideShow />} />
+  <Route path="/WatchList" element={<WatchList />} />
 </Routes>
+
       
       {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
 
@@ -348,7 +363,7 @@ useEffect(() => {
 
     </div>
   );
-};
+};  
 
 
 export default App;

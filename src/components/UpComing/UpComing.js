@@ -59,15 +59,21 @@ const UpcomingAnime = () => {
     if (page > 1) setPage((prev) => prev - 1);
   };
 
+  const handleMouseEnter = (e) => {
+  const tooltip = e.currentTarget.querySelector(".new-anime-tooltip");
+  if (tooltip) {
+    tooltip.scrollTop = 0; // 🔥 reset scroll on hover
+  }
+};
+
   return (
     <>
       <div ref={gotiRef}></div>
 
-      <div className="top">
+      <div className="new-upcoming-anime-container">
+         <div className="top">
         <h1>Up Coming</h1>
       </div>
-
-      <div className="new-upcoming-anime-container">
         {loading ? (
           <p className="load">
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Ajax_loader_metal_512.gif/250px-Ajax_loader_metal_512.gif" alt="loading_Img"/>
@@ -79,6 +85,11 @@ const UpcomingAnime = () => {
           <>
             <div className="new-anime-grid">
               {animeList.map((anime) => (
+                 <div
+    key={anime.id}
+    className="new-anime-card"
+    onMouseEnter={handleMouseEnter}
+  >
                 <div key={anime.mal_id} className="new-anime-card">
                   <img
                     src={anime.images?.jpg?.image_url || "/fallback-image.png"}
@@ -94,6 +105,7 @@ const UpcomingAnime = () => {
                       {anime.aired?.from ? anime.aired.from.split("T")[0] : "TBA"}
                     </p>
                   </div>
+                </div>
                 </div>
               ))}
             </div>
