@@ -9,6 +9,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./components/firebase";
 import WatchList from './components/WatchList/WatchList';
 import Recommend from './components/Recommend/Recommend';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse, faMagnifyingGlass, faCalendarDays, faFireFlameCurved, faBookmark, faUser } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const slides = [
@@ -118,71 +120,71 @@ useEffect(() => {
     <div className="App">
 <nav>
   <ul>
-    <div className="logo">
+      <div className="logo">
       <img src={`${process.env.PUBLIC_URL}/logo2.png`} alt="Logo" />
       SubAnime
     </div>
+<span className="navbar top-nav">
 
-      <span className='navbar'>
-          <li>
-      <NavLink
-        to="/"
-        end
-        className={({ isActive }) =>
-          `custom-btn btn-5 ${isActive ? "active" : ""}`
-        }
-      >
-        <span>Home</span>
-      </NavLink>
-    </li>
+  <li>
+    <NavLink
+      to="/"
+      end
+      className={({ isActive }) =>
+        `custom-btn btn-5 ${isActive ? "active" : ""}`
+      }
+    >
+      <FontAwesomeIcon icon={faHouse} /> <span>Home</span>
+    </NavLink>
+  </li>
 
-    <li>
-      <NavLink
-        to="/Search"
-        className={({ isActive }) =>
-          `custom-btn btn-5 ${isActive ? "active" : ""}`
-        }
-      >
-        <span>Search</span>
-      </NavLink>
-    </li>
+  <li>
+    <NavLink
+      to="/Search"
+      className={({ isActive }) =>
+        `custom-btn btn-5 ${isActive ? "active" : ""}`
+      }
+    >
+      <FontAwesomeIcon icon={faMagnifyingGlass} /> <span>Search</span>
+    </NavLink>
+  </li>
 
-    <li>
-      <NavLink
-        to="/UpComing"
-        className={({ isActive }) =>
-          `custom-btn btn-5 ${isActive ? "active" : ""}`
-        }
-      >
-        <span>Up Coming</span>
-      </NavLink>
-    </li>
+  <li>
+    <NavLink
+      to="/UpComing"
+      className={({ isActive }) =>
+        `custom-btn btn-5 ${isActive ? "active" : ""}`
+      }
+    >
+      <FontAwesomeIcon icon={faCalendarDays} /> <span>Up Coming</span>
+    </NavLink>
+  </li>
 
-    <li>
-      <NavLink
-        to="/TopAiring"
-        className={({ isActive }) =>
-          `custom-btn btn-5 ${isActive ? "active" : ""}`
-        }
-      >
-        <span>TopAiring</span>
-      </NavLink>
-    </li>
+  <li>
+    <NavLink
+      to="/TopAiring"
+      className={({ isActive }) =>
+        `custom-btn btn-5 ${isActive ? "active" : ""}`
+      }
+    >
+      <FontAwesomeIcon icon={faFireFlameCurved}  /> <span>Top Airing</span>
+    </NavLink>
+  </li>
 
-    <li>
-      <NavLink
-        to="/WatchList"
-        className={({ isActive }) =>
-          `custom-btn btn-5 ${isActive ? "active" : ""}`
-        }
-      >
-        <span>Watch List</span>
-      </NavLink>
-    </li>
-    </span>
+  <li>
+    <NavLink
+      to="/WatchList"
+      className={({ isActive }) =>
+        `custom-btn btn-5 ${isActive ? "active" : ""}`
+      }
+    >
+      <FontAwesomeIcon icon={faBookmark} /> <span>Watch List</span>
+    </NavLink>
+  </li>
+</span>
 
-    <div className='login'>
-<li>
+
+<li className='login'>
   {user ? (
     <span className="user-info">
       Hello, {user.displayName || user.username}
@@ -193,11 +195,72 @@ useEffect(() => {
     </button>
   )}
 </li>
-</div>
   </ul>
 </nav>
 
+ <div className='Bottom-nav'>
+     <ul>
+<span className='navbar'>
+  <li>
+    <NavLink
+      to="/"
+      end
+      className={({ isActive }) =>
+        `custom-btn btn-5 ${isActive ? "active" : ""}`
+      }
+    >
+      <FontAwesomeIcon icon={faHouse} /> <span>Home</span>
+    </NavLink>
+  </li>
 
+  <li>
+    <NavLink
+      to="/Search"
+      className={({ isActive }) =>
+        `custom-btn btn-5 ${isActive ? "active" : ""}`
+      }
+    >
+      <FontAwesomeIcon icon={faMagnifyingGlass} /> <span>Search</span>
+    </NavLink>
+  </li>
+
+  <li>
+    <NavLink
+      to="/UpComing"
+      className={({ isActive }) =>
+        `custom-btn btn-5 ${isActive ? "active" : ""}`
+      }
+    >
+      <FontAwesomeIcon icon={faCalendarDays} /> <span>Up Coming</span>
+    </NavLink>
+  </li>
+
+  <li>
+    <NavLink
+      to="/TopAiring"
+      className={({ isActive }) =>
+        `custom-btn btn-5 ${isActive ? "active" : ""}`
+      }
+    >
+      <FontAwesomeIcon icon={faFireFlameCurved}  /> <span>Top Airing</span>
+    </NavLink>
+  </li>
+
+  <li>
+    <NavLink
+      to="/WatchList"
+      className={({ isActive }) =>
+        `custom-btn btn-5 ${isActive ? "active" : ""}`
+      }
+    >
+      <FontAwesomeIcon icon={faBookmark} /> <span>Watch List</span>
+    </NavLink>
+  </li>
+</span>
+
+  </ul>
+  </div>
+  
       {/* First Slideshow - Slides */}
       <div className="slideshow">
         <div className="text-container">
