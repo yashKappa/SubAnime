@@ -85,6 +85,10 @@ function SideShow() {
                   <h2>{anime.title}</h2>
 
                   <p>
+                    <strong>Synopsis:</strong> {anime.synopsis}
+                  </p>
+
+                  <p>
                     <strong>Status:</strong> {anime.status}
                   </p>
 

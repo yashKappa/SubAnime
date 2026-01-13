@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import './fetch.css';
 import SearchBox from "./SearchBox";
 import AddToWatchlist from "./Add";
@@ -11,100 +11,76 @@ const AnimeFetcher = () => {
   const gotiRef = useRef(null);
 const [search, setSearch] = useState("");
 
-  const fetchAnimeData = async (page = 1, perPage = 20) => {
+const fetchAnimeData = useCallback(
+  async (page = 1, perPage = 20) => {
     const url = "https://graphql.anilist.co";
-   const query = `
-query (
-  $page: Int,
-  $perPage: Int,
-  $search: String,
-  $genre: String,
-  $status: MediaStatus,
-  $score: Int
-) {
-  Page(page: $page, perPage: $perPage) {
-    pageInfo {
-      currentPage
-      hasNextPage
-    }
-    media(
-      type: ANIME
-      search: $search
-      genre: $genre
-      status: $status
-      averageScore_greater: $score
-    ) {
-      id
-      title {
-        romaji
-        english
-        native
+
+    const query = `
+      query ($page: Int, $perPage: Int, $search: String) {
+        Page(page: $page, perPage: $perPage) {
+          pageInfo {
+            currentPage
+            hasNextPage
+          }
+          media(type: ANIME, search: $search) {
+            id
+            title {
+              romaji
+              english
+              native
+            }
+            description
+            coverImage {
+              large
+            }
+            genres
+            averageScore
+            startDate {
+              year
+            }
+            status
+            episodes
+          }
+        }
       }
-      description
-      coverImage {
-        large
-      }
-      genres
-      averageScore
-      startDate {
-        year
-        month
-        day
-      }
-      status
-      episodes
-    }
-  }
-}
-`;
+    `;
 
-
-   const variables = {
-  page,
-  perPage,
-  search: search || null, // ✅ THIS WAS MISSING
-};
-
-
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({ query, variables }),
+    const variables = {
+      page,
+      perPage,
+      search: search || null,
     };
 
     try {
       setIsLoading(true);
-      const response = await fetch(url, options);
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ query, variables }),
+      });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+      const data = await res.json();
 
-      const data = await response.json();
-
-      if (data.errors) {
-        console.error("GraphQL Errors:", data.errors);
-        setIsLoading(false);
-        return;
-      }
-
-      const pageData = data.data.Page; // Extract Page object
-      setAnimeList(pageData.media);
-      setHasNextPage(pageData.pageInfo.hasNextPage);
-      setCurrentPage(pageData.pageInfo.currentPage);
-      setIsLoading(false);
-    } catch (error) {
-      console.error("Fetch Error:", error.message);
+      setAnimeList(data.data.Page.media);
+      setHasNextPage(data.data.Page.pageInfo.hasNextPage);
+      setCurrentPage(data.data.Page.pageInfo.currentPage);
+    } catch (err) {
+      console.error(err);
+    } finally {
       setIsLoading(false);
     }
-  };
+  },
+  [search] // 👈 IMPORTANT dependency
+);
 
-  useEffect(() => {
-    fetchAnimeData(currentPage);
-  }, [currentPage]);
+
+useEffect(() => {
+  fetchAnimeData(currentPage);
+}, [currentPage, fetchAnimeData]);
+
 
   const handleNextPage = () => {
     if (hasNextPage) {
@@ -118,17 +94,16 @@ query (
     }
   };
 
-  useEffect(() => {
+useEffect(() => {
   fetchAnimeData(currentPage);
 
-  // 🔥 Scroll to top of goti div
   if (gotiRef.current) {
     gotiRef.current.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
   }
-}, [currentPage]);
+}, [currentPage, fetchAnimeData]);
 
 const handleMouseEnter = (e) => {
   const tooltip = e.currentTarget.querySelector(".new-anime-tooltip");
