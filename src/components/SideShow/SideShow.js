@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./side_show.css";
+import "../Search/fetch.css";      // reuse existing grid styles
+import "../responsive.css";
 
 function SideShow() {
   const gotiRef = useRef(null);
@@ -14,8 +16,6 @@ function SideShow() {
         `https://api.jikan.moe/v4/top/anime?filter=airing&page=${page}`
       );
       const data = await res.json();
-
-      // limit to 13 items
       setFilteredMovies(data.data.slice(0, 13));
     } catch (error) {
       console.error("API Error:", error);
@@ -25,20 +25,14 @@ function SideShow() {
 
   const handleSectionChange = (section) => {
     setCurrentSection(section);
-
-    const page =
-      section === "Weekly" ? 1 :
-      section === "Monthly" ? 2 : 3;
-
+    const page = section === "Weekly" ? 1 : section === "Monthly" ? 2 : 3;
     fetchAnime(page);
   };
 
-  // initial load
   useEffect(() => {
     fetchAnime(1);
   }, []);
 
-  // scroll to top on section change
   useEffect(() => {
     gotiRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [currentSection]);
@@ -47,12 +41,9 @@ function SideShow() {
     <>
       <div ref={gotiRef}></div>
 
-      <div className="Side">
-        <div className="movie-card-container">
-
-          <div className="top">
-            <h1>Top Airing</h1>
-          </div>
+      <div className="new-upcoming-anime-container">
+        <div className="top">
+          <h1>Top Airing</h1>
 
           <div className="set">
             {["Weekly", "Monthly", "All"].map((section) => (
@@ -67,39 +58,53 @@ function SideShow() {
               </button>
             ))}
           </div>
-
-          {loading ? (
-            <p className="load">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Ajax_loader_metal_512.gif/250px-Ajax_loader_metal_512.gif" alt="loading_Img"/>
-          Loading...
-        </p>
-          ) : (
-            <div className="movie-card-wrapper">
-              {filteredMovies.map((anime) => (
-                <div key={anime.mal_id} className="movie-card">
-                  <div className="movie-card-image">
-                    <img
-                      src={anime.images.jpg.image_url}
-                      alt={anime.title}
-                      className="movie-card-img"
-                    />
-                    <span className="sideData">
-                      <h2 className="movie-title">{anime.title}</h2>
-                      <p>
-                        <strong>Status:</strong> {anime.status}
-                      </p>
-                      <p>
-                        <strong>Genres:</strong>{" "}
-                        {anime.genres.map(g => g.name).join(", ")}
-                      </p>
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
         </div>
+
+        {loading ? (
+          <p className="load">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Ajax_loader_metal_512.gif/250px-Ajax_loader_metal_512.gif"
+              alt="loading"
+            />
+            Loading Top Airing...
+          </p>
+        ) : (
+          <div className="new-anime-grid">
+            {filteredMovies.map((anime) => (
+              <div key={anime.mal_id} className="new-anime-card">
+                <img
+                  src={anime.images.jpg.image_url}
+                  alt={anime.title}
+                  className="new-anime-poster"
+                />
+
+                <h3 className="new-anime-title">{anime.title}</h3>
+
+                {/* 🔥 SAME TOOLTIP UI */}
+                <div className="new-anime-tooltip">
+                  <h2>{anime.title}</h2>
+
+                  <p>
+                    <strong>Status:</strong> {anime.status}
+                  </p>
+
+                  <p>
+                    <strong>Genres:</strong>{" "}
+                    {anime.genres.map((g) => g.name).join(", ")}
+                  </p>
+
+                  <p>
+                    <strong>Score:</strong> {anime.score || "N/A"}
+                  </p>
+
+                  <p>
+                    <strong>Episodes:</strong> {anime.episodes || "?"}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );

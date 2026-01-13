@@ -146,10 +146,10 @@
     color: #dc95fd;
 }
 
-@media (max-width: 485px) {
+/* @media (max-width: 485px) {
 
     .new-anime-tooltip{
         height: 100vh;
     }
     
-}
+} */

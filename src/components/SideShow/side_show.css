@@ -1,43 +1,11 @@
-/* =======================
-   MAIN CONTAINER
-======================= */
-.Side {
-  width: 100%;
-  padding: 24px 16px;
-  background: #0f071a;
-  box-sizing: border-box;
-}
-
-/* =======================
-   INNER WRAPPER
-======================= */
-.Side .movie-card-container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* =======================
-   TITLE
-======================= */
-.Side .sideTop {
-  text-align: center;
-  font-size: 26px;
-  font-weight: 600;
-  margin-bottom: 18px;
-  color: #e7d7ff;
-}
-
-/* =======================
-   BUTTON GROUP
-======================= */
-.Side .set {
+.set {
   display: flex;
   justify-content: center;
   gap: 12px;
   margin-bottom: 28px;
 }
 
-.Side .Sidebtn {
+.Sidebtn {
   padding: 8px 20px;
   border-radius: 20px;
   border: none;
@@ -48,7 +16,7 @@
   transition: all 0.3s ease;
 }
 
-.Side .Sidebtn:hover {
+.Sidebtn:hover {
   padding: 8px 20px;
   border-radius: 20px;
   border: none;
@@ -57,113 +25,4 @@
   cursor: pointer;
   font-size: 14px;
   transition: all 0.3s ease;
-}
-
-/* =======================
-   GRID LAYOUT
-======================= */
-.Side .movie-card-wrapper {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  align-items: stretch;
-}
-
-/* =======================
-   CARD
-======================= */
-.Side .movie-card {
-  background: linear-gradient(135deg, #240c40, #1a0833);
-  border-radius: 14px;
-  padding: 14px;
-  display: flex;
-  align-items: flex-start; /* 🔥 FIX */
-}
-
-
-/* =======================
-   HORIZONTAL CONTENT
-======================= */
-.Side .movie-card-image {
-  display: flex;
-  align-items: flex-start; /* 🔥 FIX */
-  gap: 14px;
-  width: 100%;
-}
-
-/* =======================
-   IMAGE
-======================= */
-.Side .movie-card-img {
-  width: 110px;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 8px;
-  flex-shrink: 0;
-  background: #000;
-}
-
-/* =======================
-   TEXT DETAILS
-======================= */
-
-.Side .movie-title {
-  font-size: 15px;
-  font-weight: bold;
-  color: #ffffff;
-  margin-bottom: 6px;
-  text-align: start;
-  display: flex;
-margin-top: 5%;
-}
-
-.Side .movie-status,
-.Side .movie-genre {
-  font-size: 13px;
-  color: #cbbcff;
-  margin-bottom: 4px;
-}
-
-.sideData p, strong{
-  color: white;
-}
-
-
-
-/* =======================
-   TABLET
-======================= */
-@media (max-width: 900px) {
-  .movie-card-wrapper {
-    grid-template-columns: 1fr;
-  }
-
-  .movie-card-img {
-    width: 120px;
-    height: 170px;
-  }
-}
-
-/* =======================
-   MOBILE
-======================= */
-@media (max-width: 500px) {
-  .movie-card {
-    padding: 16px;
-  }
-
-  .movie-card-image {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .movie-card-img {
-    width: 100%;
-    height: 220px;
-  }
-
-  .movie-title {
-    margin-top: 10px;
-  }
 }
