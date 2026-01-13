@@ -920,6 +920,66 @@ html::-webkit-scrollbar-thumb:hover {
   display: none;
 }
 
+/* User dropdown */
+.user-dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+/* Dropdown hidden by default */
+
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  border-radius: 6px;
+  padding: 8px;
+  min-width: 120px;
+  display: none;
+  z-index: 999;
+}
+
+/* Show on hover */
+.user-dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Logout button */
+.dropdown-btn {
+  width: 100%;
+  background: transparent;
+  color: #fff;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 4px;
+  background-color: #e446e4;
+}
+
+.dropdown-btn:hover {
+  background-color: #962b96;
+}
+
+.login .log{
+  background-color: #915df3;
+  padding: 5px 15px;
+  color: white;
+  border: 1px solid rgb(230, 176, 255);
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+.login .log:hover{
+  background-color: #5a2e8c;
+}
 
 /* ===== RESPONSIVE ===== */
 
@@ -1045,6 +1105,12 @@ html::-webkit-scrollbar-thumb:hover {
     .login{
   width: 100%;
   text-align: end;
+  display: flex;
+  justify-content: end;
+}
+
+.dropdown-btn{
+  margin-top: 1.5rem;
 }
 
   .footer-bottom {

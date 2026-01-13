@@ -1,7 +1,13 @@
 import { useState } from "react";
 import PopUp from "../PopUp";
 import { auth, db } from "../firebase";
-import { doc, getDoc, setDoc, updateDoc, serverTimestamp } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 
 const AddToWatchlist = ({ anime }) => {
   const [popupMessage, setPopupMessage] = useState("");
@@ -11,7 +17,6 @@ const AddToWatchlist = ({ anime }) => {
 
     const user = auth.currentUser;
 
-    // ❌ Not logged in
     if (!user) {
       setPopupMessage("Please login to add Anime to your Watchlist");
       return;
@@ -23,40 +28,57 @@ const AddToWatchlist = ({ anime }) => {
       const snap = await getDoc(userRef);
       let watchlist = snap.exists() ? snap.data().watchlist || [] : [];
 
-      // ❌ Duplicate
       if (watchlist.some((item) => item.id === anime.id)) {
         setPopupMessage("Anime already exists in Watchlist ⚠️");
         return;
       }
 
-      // 🔥 Limit to 8 items
       if (watchlist.length >= 8) {
         watchlist.shift();
       }
 
-      watchlist.push({
+      // 🔥 NORMALIZE DATA (THIS IS THE KEY FIX)
+      const safeAnime = {
         id: anime.id,
-        title: anime.title.romaji,
-        image: anime.coverImage.large,
-        description: anime.description,
-        episodes: anime.episodes,
-        genres: anime.genres,
+
+        title:
+          anime.title?.romaji ||
+          anime.title ||
+          "Unknown Title",
+
+        image:
+          anime.coverImage?.large ||
+          anime.image ||
+          "",
+
+        synopsis:
+          anime.synopsis ||
+          anime.description ||
+          "",
+
+        episodes: anime.episodes ?? "?",
+        genres: anime.genres || [],
+        status: anime.status || "UNKNOWN",
+        score: anime.score || "N/A",
+        japaneseTitle:
+          anime.japaneseTitle ||
+          anime.title?.native ||
+          "",
+        aired: anime.aired || "Unknown",
         addedAt: Date.now(),
-      });
+      };
 
       if (snap.exists()) {
-        await updateDoc(userRef, { watchlist });
+        await updateDoc(userRef, { watchlist: [...watchlist, safeAnime] });
       } else {
         await setDoc(userRef, {
           userId: user.uid,
-          watchlist,
+          watchlist: [safeAnime],
           createdAt: serverTimestamp(),
         });
       }
 
-      // ✅ SUCCESS POPUP
       setPopupMessage("Anime added to Watchlist ✅");
-
     } catch (err) {
       console.error("Watchlist error:", err);
       setPopupMessage("Something went wrong ❌");

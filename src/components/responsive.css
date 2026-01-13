@@ -14,7 +14,7 @@
 
   .new-anime-tooltip {
     font-size: 0.72rem;
-    max-height: 140px;
+    max-height: 100%;
   }
 
   .top h1 {

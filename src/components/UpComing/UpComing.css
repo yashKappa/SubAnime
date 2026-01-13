@@ -139,5 +139,17 @@
 }
 
 .new-anime-tooltip h2{
-    color: #c13bff;
+    color: #ae00ff;
+}
+
+.new-anime-tooltip strong{
+    color: #dc95fd;
+}
+
+@media (max-width: 485px) {
+
+    .new-anime-tooltip{
+        height: 100vh;
+    }
+    
 }

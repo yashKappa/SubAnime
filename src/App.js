@@ -5,7 +5,7 @@ import AnimeFetcher from "./components/Search/AnimeFetcher"
 import UpcomingAnime from './components/UpComing/UpComing';
 import SideShow from './components/SideShow/SideShow';
 import AuthModal from "./components/Auth/AuthModal";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut  } from "firebase/auth";
 import { auth } from "./components/firebase";
 import WatchList from './components/WatchList/WatchList';
 import Recommend from './components/Recommend/Recommend';
@@ -116,6 +116,16 @@ useEffect(() => {
     return () => clearInterval(intervalHead);
   }, []);
 
+  const handleLogout = async () => {
+  try {
+    await signOut(auth);
+    setUser(null);
+  } catch (error) {
+    console.error("Logout failed:", error);
+  }
+};
+
+
   return (
     <div className="App">
 <nav>
@@ -184,17 +194,27 @@ useEffect(() => {
 </span>
 
 
-<li className='login'>
+<li className="login user-dropdown">
   {user ? (
-    <span className="user-info">
-      Hello, {user.displayName || user.username}
-    </span>
+    <>
+      <span className="user-info">
+        <FontAwesomeIcon icon={faUser} />{" "}
+        {user.displayName || user.username}
+      </span>
+
+      <div className="dropdown-menu">
+        <button onClick={handleLogout} className="dropdown-btn">
+          Logout
+        </button>
+      </div>
+    </>
   ) : (
-    <button className="custom-btn btn-5" onClick={() => setShowAuth(true)}>
+    <button className="log" onClick={() => setShowAuth(true)}>
       <span>Login</span>
     </button>
   )}
 </li>
+
   </ul>
 </nav>
 

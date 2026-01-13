@@ -132,6 +132,11 @@ return (
       </p>
 
       <p>
+        <strong>Synopsis:</strong>{" "}
+        {anime.synopsis || "No synopsis available"}
+      </p>
+
+      <p>
         <strong>Episodes:</strong>{" "}
         {anime.episodes || "?"}
       </p>
