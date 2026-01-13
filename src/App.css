@@ -1073,9 +1073,9 @@ html::-webkit-scrollbar-thumb:hover {
   .text-container .active{
     background-color: rgba(43, 43, 43, 0.452);
     padding: 20px;
-    width: 150%;
+    width: 180%;
     margin-bottom: -9rem;
-    margin-left: 1rem;
+    margin-left: 0.3rem;
   }
 
 }
