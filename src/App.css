@@ -1060,6 +1060,14 @@ html::-webkit-scrollbar-thumb:hover {
 
   .back-image-container{
     width: 100%;
+    justify-content: center;
+  }
+
+  .back-image-container img{
+    margin: 0%;
+    padding: 0%;
+    width: 100%;
+    border-radius: 0%;
   }
 
   .text-container .active{
